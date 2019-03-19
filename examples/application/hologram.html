@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Holograms in Movie.js</title>
+</head>
+<body>
+  <script src="../../dist/movie-iife.js"></script>
+  <script>
+    class StaticEffect extends mv.effect.Base {
+      constructor() {
+        // TODO
+      }
+      apply(target, reltime) {
+        // TODO
+      }
+    }
+
+    window.addEventListener("load", () => {
+      const footage = document.querySelector("#footage"),
+        canvas = document.querySelector("#output"),
+        movie = new mv.Movie(canvas);
+
+      let layer = new mv.layer.Video(footage);
+      layer
+        .addEffect(new mv.effect.ChromaKey({r: 0, g: 0, b: 0}))
+        .addEffect(new mv.effect.Channels({r: 1.2, g: 1.2, b: 1.6}))
+        .addEffect(new StaticEffect());
+      movie.addLayer(layer);
+
+      movie.play();
+    });
+  </script>
+  <canvas id="output"></canvas>
+  <video id="footage" src="../media/greenscreen.wmv"/>
+</body>
+</html>
